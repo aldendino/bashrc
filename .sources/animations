@@ -1,0 +1,192 @@
+#!/bin/bash
+
+animate() {
+  local dur=$1
+  local list=("${!1}")
+  # local list=$2
+  # echo $list
+  
+  for ((i = 0; i < ${#list[@]}; i++)); do
+    echo -ne "${list[$i]}"
+    sleep $dur
+  done
+}
+
+bounceHelper() {
+  local dur=$1
+  
+  local list=(
+    "."
+    "\n ."
+    "."
+    "\n   ."
+    "\n    ."
+    "\n    ."
+    "\n     ."
+    "\n     ."
+    "\n     ."
+    "\n     ."
+    "\n    ."
+    "\n    ."
+    "\n   ."
+    "\n  ."
+    "\r .."
+    "\n"
+  )
+  for ((i = 0; i < ${#list[@]}; i++)); do
+    echo -ne "${list[$i]}"
+    sleep $dur
+  done
+  # animate $dur $list[@]
+}
+
+bounce() {
+  local dur=0.015
+  for i in `seq 1 $1`; do
+    bounceHelper $dur
+  done
+  echo "."
+}
+
+dnaHelper() {
+  local dur=$1
+  
+  local list=(
+      "   O"
+    "\n  o=O"
+    "\n o===O"
+    "\n  o=O"
+    "\n   O"
+    "\n  O=o"
+    "\n O===o"
+    "\n  O=o"
+    "\n"
+  )
+  for ((i = 0; i < ${#list[@]}; i++)); do
+    echo -ne "${list[$i]}"
+    sleep $dur
+  done
+}
+
+dna() {
+  local dur=0.05
+  for i in `seq 1 $1`; do
+    dnaHelper $dur
+  done
+  echo "   O"
+}
+
+superdnaHelper() {
+  local dur=$1
+  
+  local list=(
+      "   6098)o%:::%o(860"
+    "\n 098)o%:::%o(8609"
+    "\n  6o%:%o(86098)"
+    "\n   (86098)o"
+    "\n 6098)o%::%o9"
+    "\n 098)o%::::::%o9"
+    "\n  6o%::::::%o(860"
+    "\n     6o%::%o(8609"
+    "\n       o(86098)"
+    "\n   (86098)o%:%o9"
+    "\n 6098)o%:::%o(860"
+    "\n 098)o%:::%o(8609"
+    "\n  6o%:%o(86098)"
+    "\n"
+  )
+  for ((i = 0; i < ${#list[@]}; i++)); do
+    echo -ne "${list[$i]}"
+    sleep $dur
+  done
+}
+
+superdna() {
+  local dur=0.05
+  for i in `seq 1 $1`; do
+    superdnaHelper $dur
+  done
+  echo "  (86098)o"
+}
+
+extendHelper() {
+  local dur=$1
+  if [[ $2 == "v" ]]; then
+    local dir="\n"
+  elif [[ $2 == "h" ]]; then
+    local dir="\r"
+  else
+    local dir="o"
+  fi
+  
+  local list=(
+    "$dir=              "
+    "$dir==             "
+    "$dir===            "
+    "$dir====           "
+    "$dir=====          "
+    "$dir======         "
+    "$dir=======        "
+    "$dir========       "
+    "$dir=========      "
+    "$dir==========     "
+    "$dir===========    "
+    "$dir============   "
+    "$dir=============  "
+    "$dir============== "
+    "$dir==============="
+    "$dir============== "
+    "$dir=============  "
+    "$dir============   "
+    "$dir===========    "
+    "$dir==========     "
+    "$dir=========      "
+    "$dir========       "
+    "$dir=======        "
+    "$dir======         "
+    "$dir=====          "
+    "$dir====           "
+    "$dir===            "
+    "$dir==             "
+    "$dir=              "
+    "$dir               "
+  )
+  for ((i = 0; i < ${#list[@]}; i++)); do
+    echo -ne "${list[$i]}"
+    sleep $dur
+  done
+}
+
+extend() {
+  echo -ne ""
+  local dur=0.02
+  local dir=$2
+  for i in `seq 1 $1`; do
+    extendHelper $dur $dir
+  done
+  echo ""
+}
+
+waitingHelper() {
+  local dur=$1
+  
+  local list=(
+    "\r-"
+    "\r\\"
+    "\r|"
+    "\r/"
+  )
+  for ((i = 0; i < ${#list[@]}; i++)); do
+    echo -ne "${list[$i]}"
+    sleep $dur
+  done
+}
+
+waiting() {
+  local dur=0.05
+  echo -ne "-"
+  for i in `seq 1 $1`; do
+    waitingHelper $dur
+  done
+  echo -ne "-"
+}
